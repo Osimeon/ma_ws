@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+	# Turn on URL rewriting
+	RewriteEngine On
+
+	# Protect application and system files from being viewed
+	RewriteRule ^(application|modules|system) - [F,L]
+
+	# Allow any files or directories that exist to be displayed directly
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	# Rewrite all other URLs to ws.php/
+	RewriteRule    ^ads/([A-Za-z0-9-]+)/?$   ws.php?rquest=$1   [NC,L]    # Ads Request
+	
+	RewriteRule    ^newimage/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$    ws.php?rquest=$1&imei=$2   [NC,L]    # images with imei
+	
+	RewriteRule    ^imagedetails/([A-Za-z0-9-]+)/?$   ws.php?rquest=$1   [NC,L]    # get image details
+	
+	RewriteRule    ^clientads/([A-Za-z0-9-]+)/?$   ws.php?rquest=$1   [NC,L]    # Ads Request
+</IfModule>
